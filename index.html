@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Only</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            min-width: 1280px;
+            margin: 0 auto;
+        }
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .hint {
+            border-radius: 9999px;
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            /* justify-content: center; */
+            color: white;
+            padding: 15px;
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            transform: translate(0, -50%);
+            transition: all 0.3s ease 0s;
+        }
+        .hint_blue {
+            background-color: rgba(56, 119, 237, 0.7);
+        }
+        .hint_green {
+            background-color: rgba(106, 191, 75, 0.7);;
+        }
+        .hint_stadium {
+            top: 45%;
+        }
+        .hint_bridge {
+            top: 65%;
+        }
+        .hint_hostel {
+            bottom: 18%;
+        }
+        .hint_column {
+            top: 63%;
+        }
+        .hint_museum {
+            top: 38%;
+        }
+        .hint_campus-left {
+            top: 64%;
+        }
+        .hint_campus-right {
+            top: 70%;
+        }
+        .hint_stock {
+            top: 45%;
+        }
+        .hint_building {
+            top: 20%;
+        }
+        .hint_office {
+            top: 25%;
+        }
+        .hint__icon {
+            flex-shrink: 0;
+            position: relative;
+            height: 10px;
+            width: 10px;
+        }
+        .hint__icon::before,
+        .hint__icon:after {
+            background-color: whitesmoke;
+            content: "";
+            position: absolute;
+            top: calc(50% - 1px);
+            left: 0;
+            width: 100%;
+            height: 2px;
+        }
+        .hint__icon::before {
+            transform-origin: center;
+            transform: rotate(90deg);
+            /* transition: opacity 0.15s ease 0s; */
+        }
+        .hint__text {
+            display: inline-block;
+            flex-shrink: 0;
+            font-size: 14px;
+            line-height: 1.15;
+            pointer-events: none;
+            opacity: 0;
+            max-width: 125px;
+            transition: all 0.15s ease 0s;
+        }
+        .hint_open .hint__icon {
+            margin-right: 15px;
+        }
+        .hint_open .hint__icon::before {
+            opacity: 0;
+        }
+        .hint__text_visible {
+            pointer-events: auto;
+            opacity: 1;
+        }
+        @media screen and (max-width: 1279px) {
+            .hint_stadium {
+                left: 420px;
+            }
+            .hint_bridge {
+                left: 240px;
+            }
+            .hint_hostel {
+                left: 750px;
+            }
+            .hint_column {
+                left: 730px;
+            }
+            .hint_museum {
+                left: 750px;
+            }
+            .hint_campus-left {
+                left: 950px;
+            }
+            .hint_campus-right {
+                left: 1250px;
+            }
+            .hint_stock {
+                left: 1000px;
+            }
+            .hint_building {
+                left: 1040px;
+            }
+            .hint_office {
+                left: 250px;
+            }
+
+        }
+
+        @media screen and (min-width: 1280px) and (max-width: 1919px) {
+            .hint_stadium {
+                left: calc(420px + 320 * (100vw - 1280px) / 640);
+            }
+            .hint_bridge {
+                left: calc(240px + 225 * (100vw - 1280px) / 640);
+            }
+            .hint_hostel {
+                left: calc(750px + 340 * (100vw - 1280px) / 640);
+            }
+            .hint_column {
+                left: calc(730px + 310 * (100vw - 1280px) / 640);
+            }
+            .hint_museum {
+                left: calc(750px + 350 * (100vw - 1280px) / 640);
+            }
+            .hint_campus-left {
+                left: calc(950px + 350 * (100vw - 1280px) / 640);
+            }
+            .hint_campus-right {
+                left: calc(1250px + 350 * (100vw - 1280px) / 640);
+            }
+            .hint_stock {
+                left: calc(1000px + 350 * (100vw - 1280px) / 640);
+            }
+            .hint_building {
+                left: calc(1040px + 360 * (100vw - 1280px) / 640);
+            }
+            .hint_office {
+                left: calc(250px + 250 * (100vw - 1280px) / 640);
+            }
+        }
+
+        @media screen and (min-width: 1920px) {
+            .hint_stadium {
+                left: 740px;
+            }
+            .hint_bridge {
+                left: 465px;
+            }
+            .hint_hostel {
+                left: 1090px;
+            }
+            .hint_column {
+                left: 1040px;
+            }
+            .hint_museum {
+                left: 1100px;
+            }
+            .hint_campus-left {
+                left: 1300px;
+            }
+            .hint_campus-right {
+                left: 1600px;
+            }
+            .hint_stock {
+                left: 1450px;
+            }
+            .hint_building {
+                left: 1400px;
+            }
+            .hint_office {
+                left: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./img/image.png" alt="view" />
+        <div class="backdrop"></div>
+        <div class="hint hint_green hint_stadium">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Стадион</span>
+        </div>
+        <div class="hint hint_blue hint_bridge">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Мост</span>
+        </div>
+        <div class="hint hint_green hint_hostel">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Гостиница</span>
+        </div>
+        <div class="hint hint_blue hint_column">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Колонна</span>
+        </div>
+        <div class="hint hint_green hint_museum">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Музей</span>
+        </div>
+        <div class="hint hint_green hint_campus-left">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Кампус (левое крыло)</span>
+        </div>
+        <div class="hint hint_blue hint_campus-right">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Кампус (правое крыло)</span>
+        </div>
+        <div class="hint hint_blue hint_stock">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Склад</span>
+        </div>
+        <div class="hint hint_blue hint_building">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Здание</span>
+        </div>
+        <div class="hint hint_blue hint_office">
+            <div class="hint__icon"></div>
+            <span class="hint__text">Офис</span>
+        </div>
+    </div>
+    <script>
+        function closeHint(hintEl) {
+            function undisabled(e) {
+                if (e.propertyName === "width") {
+                    hintEl.classList.remove("hint_disabled")
+                    hintEl.removeEventListener("transitionend", undisabled)
+                }
+            }
+
+            const textEl = hintEl.querySelector(".hint__text");
+            textEl.classList.remove("hint__text_visible")
+            textEl.addEventListener("transitionend", () => {
+                hintEl.classList.remove("hint_open")
+                hintEl.style = ""
+            }, { once: true })
+
+            hintEl.addEventListener("transitionend", undisabled)
+        }
+
+        function openHint(hintEl) {
+            const textEl = hintEl.querySelector(".hint__text");
+            hintEl.classList.add("hint_open");
+            hintEl.style.width = `${hintEl.clientWidth + textEl.clientWidth + 15}px`;
+            hintEl.style.height = `${hintEl.clientHeight + textEl.clientHeight}px`;
+
+            hintEl.addEventListener("transitionend", (e) => {
+                textEl.classList.add("hint__text_visible")
+            }, { once: true })
+
+            textEl.addEventListener("transitionend", () => {
+                hintEl.classList.remove("hint_disabled")
+            }, { once: true })
+        }
+
+
+        document.addEventListener("click", (e) => {
+            const targetEl = e.target;
+            
+            if (targetEl.closest(".hint")) {
+                const hintEl = e.target.closest(".hint");
+
+                if (hintEl.classList.contains("hint_disabled")) {
+                    return
+                }
+                
+                hintEl.classList.add("hint_disabled")
+                if (hintEl.classList.contains("hint_open")) {
+                    closeHint(hintEl)
+                } else {
+                    openHint(hintEl)
+                }
+            } else {
+                document.querySelectorAll(".hint_open:not(.hint_disabled)").forEach(hintEl => {
+                    closeHint(hintEl)
+                })
+            }
+        })
+    </script>
+</body>
+</html>
